@@ -2,7 +2,8 @@ import { allPrivateFields } from '@content';
 import { renderToBuffer } from '@react-pdf/renderer';
 import { NextResponse } from 'next/server';
 import PDF from 'src/components/pdf/pdf';
-
+import fs from 'fs';
+import path from 'path';
 const privateKey = process.env.PRIVATE_KEY;
 
 export async function GET(request: Request): Promise<NextResponse> {
@@ -20,8 +21,10 @@ export async function GET(request: Request): Promise<NextResponse> {
   const pdfStream = await renderToBuffer(
     <PDF privateInformation={privateInformation} />,
   );
+  const filePath = path.join(process.cwd(), 'src', 'public', `resume.pdf`);
+  const pdfBuffer = fs.readFileSync(filePath);
 
-  return new NextResponse(pdfStream, {
+  return new NextResponse(pdfBuffer, {
     headers: {
       'Content-Type': 'application/pdf',
     },

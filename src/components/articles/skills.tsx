@@ -15,7 +15,7 @@ export default function Skills(): ReactNode {
         text="Skills &amp; Expertise"
       />
 
-      <div className="grid grid-flow-row gap-x-6 gap-y-2 lg:grid-flow-col">
+      <div className="grid grid-flow-row gap-x-6 gap-y-2 lg:grid-cols-2">
         {allSkills.map((skill, skillIndex) => (
           <div className="space-y-2" key={skill._id}>
             <Heading level={4}>
